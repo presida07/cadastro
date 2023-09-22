@@ -10,14 +10,42 @@
         <ion-input formControlName="fullnane" placeholder="name" class="input"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
       </ion-item>
+      <div *ngIf="this.regForm.controls?.['fullname'].touched && this.regForm.controls?.['fullname'].invalid">
+        <ion-text *ngIf="errorControl.fullname.errors?.required">
+          Nome completo é obrigatório
+        </ion-text>
+      </div>
+
       <ion-item>
         <ion-input formControlName="email" placeholder="email" class="input"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
       </ion-item>
+      <div *ngIf="this.regForm.controls?.['email'].touched && this.regForm.controls?.['email'].invalid">
+        <ion-text *ngIf="errorControl.email.errors?.required">
+          E-mail é obrigatório
+        </ion-text>
+        <ion-text *ngIf="errorControl.email.errors?.pattern">
+          E-mail precisa ser válido
+        </ion-text>
+      </div>
+
       <ion-item>
         <ion-input formControlName="password" placeholder="password" class="input"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
+      <div *ngIf="this.regForm.controls?.['password'].touched && this.regForm.controls?.['senha'].invalid">
+        <ion-text *ngIf="errorControl.password.errors?.required">
+          Senha é obrigatório
+        </ion-text>
+        <ion-text *ngIf="errorControl.password.errors?.pattern">
+          Senha deve ter os seguintes critérios:
+          Uma Letra
+          Uma letra maiúscula 
+          Um número
+          Deve conter 8 digitos
+        </ion-text>
+      </div>
+
       <div class="signupLink">
         <p> Ja possui uma conta?<a [routerLink]="['/Login']">Entrar</a></p>
       </div>
