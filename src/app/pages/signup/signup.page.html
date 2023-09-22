@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <ion-title class="title">Bem Vindo</ion-title>
+    <p class="subTitle">Cadastre-se para criar sua conta</p>
+  </div> 
+  
+  <form [formGroup]="regForm" novalidate>
+    <div class="ion-padding">
+      <ion-item>
+        <ion-input formControlName="fullnane" placeholder="name" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="email" placeholder="email" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="password" placeholder="password" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-item>
+      <div class="signupLink">
+        <p> Ja possui uma conta?<a [routerLink]="['/Login']">Entrar</a></p>
+      </div>
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom: 30px;">
+      <ion-fab-button [routerLink]="['/home']">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+</ion-content>
