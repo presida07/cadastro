@@ -37,6 +37,7 @@ export class SignupPage implements OnInit {
     const loading = await this.loadingCtlr.create();
     await loading.present();
     if(this.regForm?.valid){
+      
       // const user = await this.authService.registerUser(email,password)
     }
   }
