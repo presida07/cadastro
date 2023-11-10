@@ -1,7 +1,9 @@
 import { AuthentivationService } from './../../authentivation.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+
 
 
 @Component({
@@ -12,7 +14,7 @@ import { LoadingController } from '@ionic/angular';
 export class SignupPage implements OnInit {
   regForm: FormGroup
 
-  constructor(public formBuilder: FormBuilder, public loadingCtlr: LoadingController, public authService: AuthentivationService ) { }
+  constructor(public formBuilder: FormBuilder, public loadingCtlr: LoadingController, public authService: AuthentivationService, public router: Router) { }
 
   ngOnInit() {
     this.regForm = this.formBuilder.group({
@@ -22,10 +24,10 @@ export class SignupPage implements OnInit {
         Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"),
         Validators.email,
       ]],
-      password:['',
+      password:['',[
       Validators.required,
-      Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")
-      ]
+      Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
+      ]]
     })
   }
 
@@ -37,9 +39,22 @@ export class SignupPage implements OnInit {
     const loading = await this.loadingCtlr.create();
     await loading.present();
     if(this.regForm?.valid){
+      const user = await this.authService.registerUser(this.regForm.value.email, this.regForm.value.password).catch((error) =>{
+      console.log(error);
+      loading.dismiss()
       
-      // const user = await this.authService.registerUser(email,password)
+    })
+        
+      if(user){
+        loading.dismiss
+        this.router.navigate(['/home'])
+       
+      }else{
+        console.log('provide correct values')
+      }  
+
+      }
     }
   }
 
-}
+
